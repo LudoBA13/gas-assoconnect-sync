@@ -25,9 +25,10 @@ function importerStructures()
 	importer.import();
 }
 
-function processUploadedFile(fileName, data, type)
+function processUploadedFile(fileName, base64Data, type)
 {
-	const blob = Utilities.newBlob(data, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', fileName);
+	const contentType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+	const blob = Utilities.newBlob(Utilities.base64Decode(base64Data), contentType, fileName);
 	
 	const resource =
 	{

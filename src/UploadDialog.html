@@ -25,7 +25,7 @@
 
         const reader = new FileReader();
         reader.onload = function(e) {
-          const data = new Uint8Array(e.target.result);
+          const data = e.target.result.split(',')[1];
           document.getElementById('status').innerText = 'Téléchargement...';
           
           google.script.run
@@ -36,9 +36,9 @@
             .withFailureHandler(function(err) {
               document.getElementById('status').innerText = 'Erreur : ' + err;
             })
-            .processUploadedFile(file.name, Array.from(data), <?= importerType ?>);
+            .processUploadedFile(file.name, data, <?= importerType ?>);
         };
-        reader.readAsArrayBuffer(file);
+        reader.readAsDataURL(file);
       }
     </script>
   </body>
