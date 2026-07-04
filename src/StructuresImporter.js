@@ -11,6 +11,6 @@ class StructuresImporter extends Importer
 
 	processContent(rows)
 	{
-		return rows;
+		SheetPatcher.patchOrCreate('ACStructures', rows);
 	}
 }

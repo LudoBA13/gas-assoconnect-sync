@@ -11,6 +11,6 @@ class PersonnesImporter extends Importer
 
 	processContent(rows)
 	{
-		return rows;
+		SheetPatcher.patchOrCreate('ACPersonnes', rows);
 	}
 }

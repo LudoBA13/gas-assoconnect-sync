@@ -44,8 +44,7 @@ class Importer
 			
 			if (this.verifyContent(rows))
 			{
-				const processedRows = this.processContent(rows);
-				// TODO: Load into the current sheet
+				this.processContent(rows);
 				ui.alert('Succès', 'Fichier importé avec succès.', ui.Button.OK);
 			}
 			else
