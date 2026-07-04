@@ -1,45 +1,70 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <base target="_top">
-    <style>
-      body { font-family: sans-serif; padding: 20px; }
-      #fileInput { margin-bottom: 10px; }
-      #status { margin-top: 10px; color: #555; }
-    </style>
-  </head>
-  <body>
-    <h3>Sélectionner le fichier AssoConnect (.xlsx)</h3>
-    <input type="file" id="fileInput" accept=".xlsx" />
-    <br />
-    <button onclick="uploadFile()">Importer</button>
-    <div id="status"></div>
+	<head>
+		<base target="_top">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+	</head>
+	<body>
+		<main class="container">
+			<p>Cette fonction permet d'importer les données <?= importerType ?> en provenance de AssoConnect pour les mettre à jour dans ce document.</p>
+			<form onsubmit="event.preventDefault(); upload();">
+				<label for="file">Fichier AssoConnect XLSX</label>
+				<input type="file" id="file" name="file" accept=".xlsx, .xls" required>
+				<button type="submit">Mettre à jour</button>
+			</form>
+			<div id="status"></div>
+		</main>
+		<script>
+			function upload()
+			{
+				const fileInput = document.getElementById('file');
+				const file = fileInput.files[0];
 
-    <script>
-      function uploadFile() {
-        const file = document.getElementById('fileInput').files[0];
-        if (!file) {
-          document.getElementById('status').innerText = 'Veuillez sélectionner un fichier.';
-          return;
-        }
+				if (!file)
+				{
+					return;
+				}
 
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          const data = e.target.result.split(',')[1];
-          document.getElementById('status').innerText = 'Téléchargement...';
-          
-          google.script.run
-            .withSuccessHandler(function() {
-              document.getElementById('status').innerText = 'Succès !';
-              google.script.host.close();
-            })
-            .withFailureHandler(function(err) {
-              document.getElementById('status').innerText = 'Erreur : ' + err;
-            })
-            .processUploadedFile(file.name, data, <?= importerType ?>);
-        };
-        reader.readAsDataURL(file);
-      }
-    </script>
-  </body>
+				document.getElementById('status').innerHTML = '<progress indeterminate></progress>';
+				resize();
+
+				const reader = new FileReader;
+				reader.onload = function (e)
+				{
+					const dataUrl = e.target.result;
+					const data = dataUrl.split(',')[1];
+					const fileData = {
+						name: file.name,
+						mimeType: file.type,
+						data: data
+					};
+
+					google.script.run
+						.withSuccessHandler(onSuccess)
+						.withFailureHandler(onFailure)
+						.processUploadedFile(fileData, <?= importerType ?>);
+				};
+				reader.readAsDataURL(file);
+			}
+
+			function onSuccess()
+			{
+				google.script.host.close();
+			}
+
+			function onFailure(error)
+			{
+				document.getElementById('status').innerHTML = `<p style="color:red;">Error: ${error.message}</p>`;
+				resize();
+			}
+
+			function resize()
+			{
+				const height = document.body.scrollHeight + 10;
+				google.script.host.setHeight(height);
+			}
+
+			window.onload = resize;
+		</script>
+	</body>
 </html>

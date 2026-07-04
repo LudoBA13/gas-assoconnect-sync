@@ -25,50 +25,30 @@ function importerStructures()
 	importer.import();
 }
 
-function processUploadedFile(fileName, base64Data, type)
+function processUploadedFile(fileData, type)
 {
-	const contentType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
-	const blob = Utilities.newBlob(Utilities.base64Decode(base64Data), contentType, fileName);
+	const rows = Importer.getDataFromXLSXFile(fileData);
 	
-	const resource =
+	let importer;
+	if (type === 'Personnes')
 	{
-		title: fileName + ' (imported)',
-		mimeType: MimeType.GOOGLE_SHEETS
-	};
-	
-	const tempFile = Drive.Files.insert(resource, blob);
-	
-	try
-	{
-		const ss = SpreadsheetApp.openById(tempFile.id);
-		const sheet = ss.getSheets()[0];
-		const rows = sheet.getDataRange().getValues();
-		
-		let importer;
-		if (type === 'Personnes')
-		{
-			importer = new PersonnesImporter();
-		}
-		else if (type === 'Structures')
-		{
-			importer = new StructuresImporter();
-		}
-		else
-		{
-			throw new Error('Unknown importer type');
-		}
-		
-		if (importer.verifyContent(rows))
-		{
-			importer.processContent(rows);
-		}
-		else
-		{
-			throw new Error('Le format du fichier est invalide pour cet import.');
-		}
+		importer = new PersonnesImporter();
 	}
-	finally
+	else if (type === 'Structures')
 	{
-		Drive.Files.remove(tempFile.id);
+		importer = new StructuresImporter();
+	}
+	else
+	{
+		throw new Error('Unknown importer type');
+	}
+	
+	if (importer.verifyContent(rows))
+	{
+		importer.processContent(rows);
+	}
+	else
+	{
+		throw new Error('Le format du fichier est invalide pour cet import.');
 	}
 }
