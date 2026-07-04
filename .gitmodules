@@ -1,0 +1,3 @@
+[submodule "external/gas-sheet-patcher"]
+	path = external/gas-sheet-patcher
+	url = https://github.com/LudoBA13/gas-sheet-patcher
