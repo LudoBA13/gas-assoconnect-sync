@@ -8,18 +8,18 @@ function onOpen()
 {
 	SpreadsheetApp.getUi()
 		.createMenu('AssoConnect')
-		.addItem('Importer Personnes', 'importerPersonnes')
-		.addItem('Importer Structures', 'importerStructures')
+		.addItem('Importer Personnes', 'importPersonnes')
+		.addItem('Importer Structures', 'importStructures')
 		.addToUi();
 }
 
-function importerPersonnes()
+function importPersonnes()
 {
 	const importer = new PersonnesImporter();
 	importer.import();
 }
 
-function importerStructures()
+function importStructures()
 {
 	const importer = new StructuresImporter();
 	importer.import();
