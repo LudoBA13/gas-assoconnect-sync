@@ -70,8 +70,6 @@ class AlignmentApplier
 	}
 }
 
-module.exports = { AlignmentApplier };
-
 
 
 
@@ -357,8 +355,6 @@ class SheetPatcher
 	}
 }
 
-module.exports = { SheetPatcher };
-
 
 
 
@@ -383,7 +379,7 @@ class RowAlignmentApplier extends AlignmentApplier
 	}
 }
 
-module.exports = { RowAlignmentApplier };
+
 
 
 /**
@@ -602,9 +598,6 @@ class SeriesPatcher
 	}
 }
 
-module.exports = { SeriesPatcher };
-
-
 
 
 
@@ -631,7 +624,3 @@ class ColumnAlignmentApplier extends AlignmentApplier
 		this.sheet.moveColumns(this.sheet.getRange(1, from + 1), to + 1);
 	}
 }
-
-module.exports = { ColumnAlignmentApplier };
-
-
