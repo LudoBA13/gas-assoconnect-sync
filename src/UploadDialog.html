@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <style>
+      body { font-family: sans-serif; padding: 20px; }
+      #fileInput { margin-bottom: 10px; }
+      #status { margin-top: 10px; color: #555; }
+    </style>
+  </head>
+  <body>
+    <h3>Sélectionner le fichier AssoConnect (.xlsx)</h3>
+    <input type="file" id="fileInput" accept=".xlsx" />
+    <br />
+    <button onclick="uploadFile()">Importer</button>
+    <div id="status"></div>
+
+    <script>
+      function uploadFile() {
+        const file = document.getElementById('fileInput').files[0];
+        if (!file) {
+          document.getElementById('status').innerText = 'Veuillez sélectionner un fichier.';
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const data = new Uint8Array(e.target.result);
+          document.getElementById('status').innerText = 'Téléchargement...';
+          
+          google.script.run
+            .withSuccessHandler(function() {
+              document.getElementById('status').innerText = 'Succès !';
+              google.script.host.close();
+            })
+            .withFailureHandler(function(err) {
+              document.getElementById('status').innerText = 'Erreur : ' + err;
+            })
+            .processUploadedFile(file.name, Array.from(data), <?= importerType ?>);
+        };
+        reader.readAsArrayBuffer(file);
+      }
+    </script>
+  </body>
+</html>

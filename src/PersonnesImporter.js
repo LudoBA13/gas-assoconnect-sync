@@ -1,5 +1,10 @@
 class PersonnesImporter extends Importer
 {
+	constructor()
+	{
+		super('Personnes');
+	}
+
 	verifyContent(rows)
 	{
 		if (rows.length === 0)

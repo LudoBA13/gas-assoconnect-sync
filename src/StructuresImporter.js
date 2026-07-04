@@ -1,5 +1,10 @@
 class StructuresImporter extends Importer
 {
+	constructor()
+	{
+		super('Structures');
+	}
+
 	verifyContent(rows)
 	{
 		if (rows.length === 0)
