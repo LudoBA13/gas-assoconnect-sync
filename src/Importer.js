@@ -12,7 +12,7 @@ class Importer
 	import()
 	{
 		const template = HtmlService.createTemplateFromFile('UploadDialog');
-		template.importerType = "'" + this.type + "'";
+		template.importerType = this.type;
 		const html = template.evaluate().setWidth(400);
 		SpreadsheetApp.getUi().showModalDialog(html, 'Importer les ' + this.type);
 	}

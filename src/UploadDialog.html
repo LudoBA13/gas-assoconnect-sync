@@ -42,7 +42,7 @@
 					google.script.run
 						.withSuccessHandler(onSuccess)
 						.withFailureHandler(onFailure)
-						.processUploadedFile(fileData, <?= importerType ?>);
+						.processUploadedFile(fileData, '<?= importerType ?>');
 				};
 				reader.readAsDataURL(file);
 			}
