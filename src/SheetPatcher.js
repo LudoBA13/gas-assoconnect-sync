@@ -70,6 +70,11 @@ class AlignmentApplier
 	}
 }
 
+if (typeof module !== 'undefined' && module.exports)
+{
+	module.exports = { AlignmentApplier };
+}
+
 
 
 
@@ -355,6 +360,11 @@ class SheetPatcher
 	}
 }
 
+if (typeof module !== 'undefined' && module.exports)
+{
+	module.exports = { SheetPatcher };
+}
+
 
 
 
@@ -379,7 +389,10 @@ class RowAlignmentApplier extends AlignmentApplier
 	}
 }
 
-
+if (typeof module !== 'undefined' && module.exports)
+{
+	module.exports = { RowAlignmentApplier };
+}
 
 
 /**
@@ -598,6 +611,12 @@ class SeriesPatcher
 	}
 }
 
+if (typeof module !== 'undefined' && module.exports)
+{
+	module.exports = { SeriesPatcher };
+}
+
+
 
 
 
@@ -624,3 +643,10 @@ class ColumnAlignmentApplier extends AlignmentApplier
 		this.sheet.moveColumns(this.sheet.getRange(1, from + 1), to + 1);
 	}
 }
+
+if (typeof module !== 'undefined' && module.exports)
+{
+	module.exports = { ColumnAlignmentApplier };
+}
+
+
