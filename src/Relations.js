@@ -17,7 +17,7 @@ function updatePersonRelations()
 		throw new Error('Headers "ID du Contact" or "structures" not found.');
 	}
 
-	const relationRows = [['personId', 'structureId']];
+	const relationRows = [['compositeId', 'personId', 'structureId']];
 	const structureRegex = /profile\/(\d+)/g;
 
 	for (let i = 1; i < data.length; i++)
@@ -28,7 +28,8 @@ function updatePersonRelations()
 		{
 			for (const match of structures.matchAll(structureRegex))
 			{
-				relationRows.push([personId, match[1]]);
+				const structureId = match[1];
+				relationRows.push([`${personId}_${structureId}`, personId, structureId]);
 			}
 		}
 	}
