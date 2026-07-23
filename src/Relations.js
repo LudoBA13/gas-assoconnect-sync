@@ -1,4 +1,4 @@
-function updatePersonnesRelations()
+function updatePersonRelations()
 {
 	const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
 	const sourceSheet = spreadsheet.getSheetByName('ACPersonnes');

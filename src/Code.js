@@ -8,14 +8,14 @@ function onOpen()
 {
 	SpreadsheetApp.getUi()
 		.createMenu('AssoConnect')
-		.addItem('Importer Personnes', 'importPersonnes')
+		.addItem('Importer Persons', 'importPersons')
 		.addItem('Importer Structures', 'importStructures')
 		.addToUi();
 }
 
-function importPersonnes()
+function importPersons()
 {
-	const importer = new PersonnesImporter();
+	const importer = new PersonImporter();
 	importer.import();
 }
 
@@ -30,9 +30,9 @@ function processUploadedFile(fileData, type)
 	const rows = Importer.getDataFromXLSXFile(fileData);
 	
 	let importer;
-	if (type === 'Personnes')
+	if (type === 'Persons')
 	{
-		importer = new PersonnesImporter();
+		importer = new PersonImporter();
 	}
 	else if (type === 'Structures')
 	{

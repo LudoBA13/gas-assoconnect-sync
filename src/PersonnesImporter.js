@@ -1,8 +1,8 @@
-class PersonnesImporter extends Importer
+class PersonImporter extends Importer
 {
 	constructor()
 	{
-		super('Personnes');
+		super('Persons');
 	}
 
 	verifyContent(rows)
@@ -17,6 +17,6 @@ class PersonnesImporter extends Importer
 	processContent(rows)
 	{
 		SheetPatcher.patchOrCreate('ACPersonnes', rows);
-		updatePersonnesRelations();
+		updatePersonRelations();
 	}
 }
