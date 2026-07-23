@@ -17,5 +17,6 @@ class PersonnesImporter extends Importer
 	processContent(rows)
 	{
 		SheetPatcher.patchOrCreate('ACPersonnes', rows);
+		updatePersonnesRelations();
 	}
 }
