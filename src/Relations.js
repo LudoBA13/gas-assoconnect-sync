@@ -9,10 +9,10 @@ function updatePersonnesRelations()
 
 	const data = sourceSheet.getDataRange().getValues();
 	const headers = data[0];
-	const personIdIndex = headers.indexOf('ID du Contact');
-	const structuresIndex = headers.indexOf('structures');
+	const personIdIdx = headers.indexOf('ID du Contact');
+	const structuresIdx = headers.indexOf('structures');
 
-	if (personIdIndex === -1 || structuresIndex === -1)
+	if (personIdIdx === -1 || structuresIdx === -1)
 	{
 		throw new Error('Headers "ID du Contact" or "structures" not found.');
 	}
@@ -22,8 +22,8 @@ function updatePersonnesRelations()
 
 	for (let i = 1; i < data.length; i++)
 	{
-		const personId = data[i][personIdIndex];
-		const structures = data[i][structuresIndex];
+		const personId = data[i][personIdIdx];
+		const structures = data[i][structuresIdx];
 		if (structures)
 		{
 			for (const match of structures.matchAll(structureRegex))
