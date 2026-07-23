@@ -19,7 +19,6 @@ function importPersons()
 	importer.import();
 }
 
-...
 function processUploadedFile(fileData, type)
 {
 	const rows = Importer.getDataFromXLSXFile(fileData);
