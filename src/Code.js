@@ -15,24 +15,19 @@ function onOpen()
 
 function importPersons()
 {
-	const importer = new PersonImporter();
+	const importer = new PersonsImporter();
 	importer.import();
 }
 
-function importStructures()
-{
-	const importer = new StructuresImporter();
-	importer.import();
-}
-
+...
 function processUploadedFile(fileData, type)
 {
 	const rows = Importer.getDataFromXLSXFile(fileData);
-	
+
 	let importer;
 	if (type === 'personnes')
 	{
-		importer = new PersonImporter();
+		importer = new PersonsImporter();
 	}
 	else if (type === 'structures')
 	{
