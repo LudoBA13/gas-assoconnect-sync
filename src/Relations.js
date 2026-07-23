@@ -28,7 +28,8 @@ function updatePersonRelations()
 		{
 			for (const match of structures.matchAll(structureRegex))
 			{
-				const structureId = match[1];
+				const personId = Number(data[i][personIdIdx]);
+				const structureId = Number(match[1]);
 				relationRows.push([`${personId}_${structureId}`, personId, structureId]);
 			}
 		}
