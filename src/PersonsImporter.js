@@ -4,7 +4,7 @@ class PersonsImporter extends Importer
 	{
 		super('personnes');
 	}
-...
+
 	verifyContent(rows)
 	{
 		if (rows.length === 0)
