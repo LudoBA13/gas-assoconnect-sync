@@ -1,10 +1,10 @@
 function updatePersonnesRelations()
 {
 	const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-	const sourceSheet = spreadsheet.getSheetByName('ACStructures');
+	const sourceSheet = spreadsheet.getSheetByName('ACPersonnes');
 	if (!sourceSheet)
 	{
-		throw new Error('Sheet ACStructures not found.');
+		throw new Error('Sheet ACPersonnes not found.');
 	}
 
 	const data = sourceSheet.getDataRange().getValues();
