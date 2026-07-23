@@ -2,7 +2,7 @@ class StructuresImporter extends Importer
 {
 	constructor()
 	{
-		super('Structures');
+		super('structures');
 	}
 
 	verifyContent(rows)

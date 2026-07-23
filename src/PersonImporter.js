@@ -2,7 +2,7 @@ class PersonImporter extends Importer
 {
 	constructor()
 	{
-		super('Persons');
+		super('personnes');
 	}
 
 	verifyContent(rows)
